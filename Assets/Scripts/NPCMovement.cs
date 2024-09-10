@@ -8,12 +8,20 @@ public class NPCMovement : MonoBehaviour
     [SerializeField] private float _stopDistanceThreshold = 0.1f;
     [SerializeField] private float _stopRotationThreshold = 5f;
 
+    private Vector3 _startPosition;
+    private bool _isMoving = true;
+
+    private void Start()
+    {
+        _startPosition = gameObject.transform.position;
+    }
+
     void Update()
     {
         Vector3 direction = _targetPoint.position - transform.position;
         direction.y = 0;
 
-        if (direction.magnitude > _stopDistanceThreshold)
+        if (_isMoving)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _speedRotation * Time.deltaTime);
@@ -23,5 +31,16 @@ public class NPCMovement : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, _targetPoint.position, _speedMove * Time.deltaTime);
             }
         }
+    }
+
+    public void Restart()
+    {
+        gameObject.transform.position = _startPosition;
+        _isMoving = true;
+    }
+
+    public void StopMoving()
+    {
+        _isMoving = false;
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCTargetControl : MonoBehaviour
@@ -31,7 +29,6 @@ public class NPCTargetControl : MonoBehaviour
     {
         float randomX = Random.Range(_borderLeft.position.x, _borderRight.position.x);
         float randomZ = Random.Range(_borderDown.position.z, _borderUp.position.z);
-
         transform.position = new Vector3(randomX, _yCoordinate, randomZ);
     }
 }

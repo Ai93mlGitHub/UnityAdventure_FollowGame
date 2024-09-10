@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameController _gameController;
+    [SerializeField] private TextMeshProUGUI _timer;
+    [SerializeField] private GameObject _winMessage;
+    [SerializeField] private GameObject _loseMessage;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        _timer.text = _gameController.TimeElapsed.ToString("F0") + "/" +_gameController.TimerGoal.ToString("F0");
+    }
+
+    public void WinMessage()
+    {
+        _winMessage.SetActive(true);
+    }
+
+    public void LoseMessage()
+    {
+        _loseMessage.SetActive(true);
+    }
+
+    public void CloseAllMessage()
+    {
+        _winMessage.SetActive(false);
+        _loseMessage.SetActive(false);
+
     }
 }
