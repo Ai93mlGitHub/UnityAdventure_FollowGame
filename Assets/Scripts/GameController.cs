@@ -3,41 +3,31 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private float _radiusGoal;
-    [SerializeField] private float _timerGoal;
+    [SerializeField] public float _timerGoal;
     [SerializeField] private GameObject _player;
     [SerializeField] private UIController _uicontroller;
     [SerializeField] private GameObject _npc;
     [SerializeField] private NPCTargetControl _npcTargetControl;
 
     private bool _isRunning = true;
-    private float _timeElapsed = 0f;
     private float _distance;
     private NPCMovement _npcMovement;
     private PlayerMovement _playerMovement;
     private KeyCode ResetKey = KeyCode.R;
 
+    public float TimeElapsed { get; private set; } = 0f;
+
     private void Awake()
     {
         _npcMovement = _npc.GetComponent<NPCMovement>();
         _playerMovement = _player.GetComponent<PlayerMovement>();
-    }
-
-    public float RadiusGoal
-    {
-        get { return _radiusGoal; }
-        private set { _radiusGoal = value; }
-    }
-
-    public float TimeElapsed
-    {
-        get { return _timeElapsed; }
-        private set { _timeElapsed = value; }
+        _npc.GetComponent<CircleDrawer>().SetRadiusCircle(_radiusGoal);
     }
 
     public float TimerGoal
     {
-        get { return _timerGoal; }
-        private set { _timerGoal = value; }
+        get => _timerGoal;
+        private set => _timerGoal = value;
     }
 
     void Start()
@@ -56,9 +46,9 @@ public class GameController : MonoBehaviour
 
         if (_isRunning)
         {
-            _timeElapsed += Time.deltaTime;
+            TimeElapsed += Time.deltaTime;
 
-            if (_timeElapsed >= _timerGoal)
+            if (TimeElapsed >= _timerGoal)
             {
                 WinGame();
             }
@@ -92,7 +82,7 @@ public class GameController : MonoBehaviour
     private void StartResetGame()
     {
         _isRunning = true;
-        _timeElapsed = 0f;
+        TimeElapsed = 0f;
         _uicontroller.CloseAllMessage();
         _npcMovement.Restart();
         _playerMovement.Restart();
