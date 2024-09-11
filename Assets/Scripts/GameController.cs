@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -10,12 +7,14 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject _player;
     [SerializeField] private UIController _uicontroller;
     [SerializeField] private GameObject _npc;
+    [SerializeField] private NPCTargetControl _npcTargetControl;
 
     private bool _isRunning = true;
     private float _timeElapsed = 0f;
     private float _distance;
     private NPCMovement _npcMovement;
     private PlayerMovement _playerMovement;
+    private KeyCode ResetKey = KeyCode.R;
 
     private void Awake()
     {
@@ -65,7 +64,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(ResetKey))
         {
             StartResetGame();
         }
@@ -97,5 +96,6 @@ public class GameController : MonoBehaviour
         _uicontroller.CloseAllMessage();
         _npcMovement.Restart();
         _playerMovement.Restart();
+        _npcTargetControl.SetRandomCoordinateWithinBorders();
     }
 }

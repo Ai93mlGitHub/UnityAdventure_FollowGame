@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DrawTargetCircle : MonoBehaviour
 {
     [SerializeField] private GameController _gameController;
-   [SerializeField] private int _segments = 36;
+    [SerializeField] private int _segments = 36;
     [SerializeField] private float _lineWidth = 0.3f;
     [SerializeField] private Color _circleColor = Color.white;
 
@@ -15,22 +13,17 @@ public class DrawTargetCircle : MonoBehaviour
     private void Awake()
     {
         _radius = _gameController.RadiusGoal;
+        _lineRenderer = gameObject.GetComponent<LineRenderer>();
     }
     void Start()
     {
-        _lineRenderer = gameObject.GetComponent<LineRenderer>();
-
-        _lineRenderer.positionCount = _segments + 1;
-        _lineRenderer.widthMultiplier = _lineWidth;
-        _lineRenderer.useWorldSpace = false;
-        _lineRenderer.startColor = _circleColor;
-        _lineRenderer.endColor = _circleColor;
-
+        SetCircle();
         CreateCircle();
     }
     void CreateCircle()
     {
         float angle = 360f / _segments;
+
         for (int i = 0; i <= _segments; i++)
         {
             float radian = Mathf.Deg2Rad * angle * i;
@@ -38,5 +31,14 @@ public class DrawTargetCircle : MonoBehaviour
             float z = Mathf.Sin(radian) * _radius;
             _lineRenderer.SetPosition(i, new Vector3(x, 0, z));
         }
+    }
+
+    void SetCircle()
+    {
+        _lineRenderer.positionCount = _segments + 1;
+        _lineRenderer.widthMultiplier = _lineWidth;
+        _lineRenderer.useWorldSpace = false;
+        _lineRenderer.startColor = _circleColor;
+        _lineRenderer.endColor = _circleColor;
     }
 }

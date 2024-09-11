@@ -8,14 +8,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _startPosition;
     private bool _isMoving = true;
 
-    private void Start()
+    private void Awake()
     {
         _startPosition = gameObject.transform.position;
     }
 
     void Update()
     {
-
         if (_isMoving)
         {
             float moveX = Input.GetAxis("Horizontal");

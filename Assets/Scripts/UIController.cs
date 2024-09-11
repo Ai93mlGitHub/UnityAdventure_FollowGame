@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-        _timer.text = _gameController.TimeElapsed.ToString("F0") + "/" +_gameController.TimerGoal.ToString("F0");
+        _timer.text = _gameController.TimeElapsed.ToString("F0") + "/" + _gameController.TimerGoal.ToString("F0");
     }
 
     public void WinMessage()
@@ -27,6 +27,5 @@ public class UIController : MonoBehaviour
     {
         _winMessage.SetActive(false);
         _loseMessage.SetActive(false);
-
     }
 }

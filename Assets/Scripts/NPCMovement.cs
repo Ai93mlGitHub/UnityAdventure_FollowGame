@@ -11,7 +11,7 @@ public class NPCMovement : MonoBehaviour
     private Vector3 _startPosition;
     private bool _isMoving = true;
 
-    private void Start()
+    private void Awake()
     {
         _startPosition = gameObject.transform.position;
     }
