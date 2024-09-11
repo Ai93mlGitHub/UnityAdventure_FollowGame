@@ -373,7 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca83a917404451e4cbefb1b75d6cb0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameController: {fileID: 62374260}
   _segments: 36
   _lineWidth: 0.3
   _circleColor: {r: 1, g: 1, b: 1, a: 1}
